@@ -94,4 +94,23 @@ export class ConsultationController {
       );
     }
   }
+  async deleteConsultation(c: Context) {
+    try {
+      const id = c.req.param('id');
+      const deletedConsultation = await consultationService.deleteConsultation(id);
+      if (!deletedConsultation) {
+        return c.json({ message: 'Consultation not found' }, 404);
+      }
+      return c.json(
+        { message: 'Consultation deleted successfully', consultation: deletedConsultation },
+        200
+      );
+    } catch (error) {
+      console.error('Error deleting consultation:', error);
+      return c.json(
+        { message: 'Error deleting consultation', error: error instanceof Error ? error.message : error },
+        500
+      );
+    }
+  }
 }

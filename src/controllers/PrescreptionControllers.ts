@@ -90,4 +90,20 @@ export class PrescreptionController {
       );
     }
   }
+  async deletePrescreption(c: Context) {
+    try {
+      const id = c.req.param('id');
+      const deletedPrescription = await prescreptionService.deletePrescreption(id);
+      if (!deletedPrescription) {
+        return c.json({ message: 'Prescription not found' }, 404);
+      }
+      return c.json({ message: 'Prescription deleted successfully', prescription: deletedPrescription }, 200);
+    } catch (error) {
+      console.error('Error deleting prescription:', error);
+      return c.json(
+        { message: 'Error deleting prescription', error: error instanceof Error ? error.message : error },
+        500
+      );
+    }
+  }
 }

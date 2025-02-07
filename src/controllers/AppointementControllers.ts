@@ -84,4 +84,19 @@ export class AppointementController {
       return c.json({ message: 'Error updating appointement', error }, 500);
     }
   }
+  async deleteAppointement(c: Context) {
+    try {
+      const id = c.req.param('id'); // Récupère l'ID depuis l'URL
+      const deletedAppointement = await appointementService.deleteAppointement(id);
+
+      if (!deletedAppointement) {
+        return c.json({ message: 'Appointement not found' }, 404);
+      }
+
+      return c.json({ message: 'Appointement deleted successfully', appointement: deletedAppointement }, 200);
+    } catch (error) {
+      console.error('Error deleting appointement:', error);
+      return c.json({ message: 'Error deleting appointement', error }, 500);
+    }
+  }
 }

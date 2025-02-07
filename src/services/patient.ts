@@ -92,4 +92,17 @@ export class PatientService {
       throw new Error(error instanceof Error ? error.message : 'Database error');
     }
   }
+  async deletePatient(id: string) {
+    try {
+      const [deletedPatient] = await db
+        .delete(patient)
+        .where(eq(patient.idPatient, id))
+        .returning();
+
+      return deletedPatient;
+    } catch (error) {
+      console.error('Error deleting patient:', error);
+      throw new Error(error instanceof Error ? error.message : 'Database error');
+    }
+  }
 }

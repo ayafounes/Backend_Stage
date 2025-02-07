@@ -11,6 +11,6 @@ router.get('/:id', (c) =>consultationController.getConsultationById(c));
 router.post('/', (c) => consultationController.addConsultation(c));
 router.put('/:id', (c) => consultationController.updateConsultation(c));
 router.get('/', (c) => consultationController.getAllConsultation(c));
-
+router.delete('/:id', (c) => consultationController.deleteConsultation(c));
 export default router;
 

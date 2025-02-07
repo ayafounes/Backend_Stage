@@ -11,5 +11,6 @@ router.get('/:id', (c) => patientController.getPatientById(c));
 router.post('/', (c) => patientController.addPatient(c));
 router.put('/:id', (c) =>patientController.updatePatient(c));
 router.get('/', (c) => patientController.getAllPatient(c));
+router.delete('/:id', (c) => patientController.deletePatient(c));
 export default router;
 

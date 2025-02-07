@@ -77,5 +77,18 @@ export class ConsultationService {
       throw new Error(error instanceof Error ? error.message : 'Database error');
     }
   }
+  async deleteConsultation(id: string) {
+    try {
+      const [deletedConsultation] = await db
+        .delete(consultation)
+        .where(eq(consultation.idConsultation, id))
+        .returning();
+      
+      return deletedConsultation;
+    } catch (error) {
+      console.error('Error deleting consultation:', error);
+      throw new Error(error instanceof Error ? error.message : 'Database error');
+    }
+  }
   
 }

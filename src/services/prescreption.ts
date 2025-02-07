@@ -65,4 +65,17 @@ export class PrescreptionService {
       throw new Error(error instanceof Error ? error.message : 'Database error');
     }
   }
+  async deletePrescreption(id: string) {
+    try {
+      const [deletedPrescription] = await db
+        .delete(prescription)
+        .where(eq(prescription.idPrescription, id))
+        .returning();
+
+      return deletedPrescription;
+    } catch (error) {
+      console.error('Error deleting prescription:', error);
+      throw new Error(error instanceof Error ? error.message : 'Database error');
+    }
+  }
 }

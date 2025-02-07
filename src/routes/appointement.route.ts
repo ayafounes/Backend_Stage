@@ -11,6 +11,7 @@ router.get('/:id', (c) => appointementController.getAppointementById(c));
 router.post('/', (c) =>appointementController.addAppointement(c));
 router.put('/:id', (c) => appointementController.updateAppointement(c));
 router.get('/', (c) => appointementController.getAllAppointement(c));
+router.delete('/:id', (c) => appointementController.deleteAppointement(c));
 
 export default router;
 

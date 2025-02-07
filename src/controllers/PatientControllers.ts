@@ -109,4 +109,17 @@ export class PatientController {
       return c.json({ message: 'Error updating patient', error: error instanceof Error ? error.message : error }, 500);
     }
   }
+  async deletePatient(c: Context) {
+    try {
+      const id = c.req.param('id');
+      const deletedPatient = await patientService.deletePatient(id);
+      if (!deletedPatient) {
+        return c.json({ message: 'Patient not found' }, 404);
+      }
+      return c.json({ message: 'Patient deleted successfully', patient: deletedPatient }, 200);
+    } catch (error) {
+      console.error('Error deleting patient:', error);
+      return c.json({ message: 'Error deleting patient', error: error instanceof Error ? error.message : error }, 500);
+    }
+  }
 }

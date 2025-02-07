@@ -72,4 +72,17 @@ export class AppointementService {
       throw new Error(error instanceof Error ? error.message : 'Database error');
     }
   }
+  async deleteAppointement(id: string) {
+    try {
+      const [deletedAppointement] = await db
+        .delete(appointement)
+        .where(eq(appointement.idAppointement, id))
+        .returning();
+  
+      return deletedAppointement;
+    } catch (error) {
+      console.error('Error deleting appointement:', error);
+      throw new Error(error instanceof Error ? error.message : 'Database error');
+    }
+  }
 }
